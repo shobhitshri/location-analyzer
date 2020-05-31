@@ -1,0 +1,222 @@
+{
+  "locations": [
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {
+    },
+    {
+
+    },
+    {
+      "timestampMs": "1565071559977",
+      "accuracy": 699
+    },
+    {
+      "timestampMs": "1565071638150",
+      "accuracy": 699
+    },
+    {
+      "timestampMs": "1565071659307",
+
+      "accuracy": 800
+    },
+    {
+      "timestampMs": "1565071689351",
+
+      "accuracy": 699
+    },
+    {
+      "timestampMs": "1565071848419",
+
+      "accuracy": 699
+    },
+    {
+      "timestampMs": "1565071909996",
+
+      "accuracy": 800,
+      "activity": [
+        {
+          "timestampMs": "1565071881067",
+          "activity": [
+            {
+              "type": "TILTING",
+              "confidence": 100
+            }
+          ]
+        },
+        {
+          "timestampMs": "1565071882849",
+          "activity": [
+            {
+              "type": "STILL",
+              "confidence": 32
+            },
+            {
+              "type": "IN_VEHICLE",
+              "confidence": 21
+            },
+            {
+              "type": "IN_ROAD_VEHICLE",
+              "confidence": 21
+            },
+            {
+              "type": "IN_FOUR_WHEELER_VEHICLE",
+              "confidence": 21
+            },
+            {
+              "type": "IN_CAR",
+              "confidence": 21
+            },
+            {
+              "type": "ON_BICYCLE",
+              "confidence": 18
+            },
+            {
+              "type": "ON_FOOT",
+              "confidence": 15
+            },
+            {
+              "type": "WALKING",
+              "confidence": 15
+            },
+            {
+              "type": "IN_RAIL_VEHICLE",
+              "confidence": 11
+            },
+            {
+              "type": "UNKNOWN",
+              "confidence": 2
+            },
+            {
+              "type": "RUNNING",
+              "confidence": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "timestampMs": "1565071939773",
+
+      "accuracy": 39,
+      "altitude": 841,
+      "verticalAccuracy": 2
+    },
+    {
+      "timestampMs": "1565071942636",
+
+      "accuracy": 39,
+      "altitude": 841,
+      "verticalAccuracy": 2,
+      "activity": [
+        {
+          "timestampMs": "1565071946030",
+          "activity": [
+            {
+              "type": "STILL",
+              "confidence": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "timestampMs": "1565072757725",
+
+      "accuracy": 39,
+      "altitude": 841,
+      "verticalAccuracy": 2
+    },
+    {
+      "timestampMs": "1565073546580",
+
+      "accuracy": 39,
+      "altitude": 841,
+      "verticalAccuracy": 2
+    },
+    {
+      "timestampMs": "1565074100310",
+
+      "accuracy": 25,
+      "altitude": 841,
+      "verticalAccuracy": 2,
+      "activity": [
+        {
+          "timestampMs": "1565073887010",
+          "activity": [
+            {
+              "type": "STILL",
+              "confidence": 100
+            }
+          ]
+        },
+        {
+          "timestampMs": "1565074182359",
+          "activity": [
+            {
+              "type": "STILL",
+              "confidence": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "timestampMs": "1565074394971",
+
+      "accuracy": 33,
+      "altitude": 841,
+      "verticalAccuracy": 2,
+      "activity": [
+        {
+          "timestampMs": "1565074355754",
+          "activity": [
+            {
+              "type": "STILL",
+              "confidence": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "timestampMs": "1565074414798",
+
+      "accuracy": 21,
+      "activity": [
+        {
+          "timestampMs": "1565074434808",
+          "activity": [
+            {
+              "type": "STILL",
+              "confidence": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "timestampMs": "1565074501149",
+
+      "accuracy": 31
+    },
+    {
+      "timestampMs": "1565075639475",
+
+      "accuracy": 31
+    }
+  ]
+}
