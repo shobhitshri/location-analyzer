@@ -3,6 +3,8 @@
 This is a program to build the commute log from your Google location history. You can use the
  generated CSV file to analyze your commute patterns, but mostly for curiosity and fun! This only
   needs Java 8, or higher, to run.
+  
+  More information here: https://medium.com/@shobhit.shri/my-commute-pattern-38d952c77511
 
 ## Getting Started
 
