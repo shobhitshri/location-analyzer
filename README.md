@@ -29,6 +29,10 @@ To use this script, you only need to select and download your "Location History"
 
 #### 3. Run the script:
 
+You can download the latest "commute-analyzer.jar" jar from the release tab of this repository
+: https://github.com/shobhitshri/location-analyzer/releases
+
+
 ```shell
 java -jar commute-analyzer.jar -i "C:\Users\your-name\Location History.json" -o C:\Users
 \your-name\ -lah 12.739082 -loh 77.706344 -law 12.9794710 -low 77.6366410 -t IST -m 10000
@@ -54,7 +58,8 @@ arguments:
  shorter distances.
 -t      time zone              - [OPTIONAL] Default is local time of the machine where it is run
  but you can give the time zone if the data is generated for some other zone like PST. Find the
- correct term for you from here: https://docs.oracle.com/javase/8/docs/api/java/time/ZoneId.html#SHORT_IDS 
+ correct term for you from here: 
+https://docs.oracle.com/javase/8/docs/api/java/time/ZoneId.html#SHORT_IDS 
 ```
 
 ### 4. Review the Results
