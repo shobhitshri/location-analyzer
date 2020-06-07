@@ -2,6 +2,7 @@ package com.location.commute.controller;
 
 import com.location.commute.analysis.analyzer.CommuteAnalyzer;
 import com.location.model.Location;
+import java.io.FileNotFoundException;
 import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,6 +26,11 @@ public class Analyzer {
 
       CommuteAnalyzer commuteAnalyzer = new CommuteAnalyzer(homeLocation, workLocation);
       commuteAnalyzer.analyze(commuteParameters.getLocationFilePath());
+    } catch (FileNotFoundException ex) {
+      System.out.println(
+          "Following issue happened in the output file: " + ex.getMessage());
+      logger.error("Exception in processing: {} ", ex);
+      return false;
     } catch (Exception ex) {
       System.out.println(
           "Some unknown error happened, please contact me on the GitHUb page: " + ex.getMessage());

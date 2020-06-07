@@ -15,15 +15,21 @@ public class Commute {
   Location work;
   boolean isFromHomeToWork;
 
-  public void resetLocations() {
-    home = null;
-    work = null;
-  }
-
   public static double getWorkDuration(final Commute toWork, final Commute fromWork) {
     LocalDateTime reachingWork = toWork.getWork().getDateFromTimeStamp();
     LocalDateTime leavingWork = fromWork.getWork().getDateFromTimeStamp();
     return getTimeDuration(reachingWork, leavingWork);
+  }
+
+  private static double getTimeDuration(final LocalDateTime dateHome,
+      final LocalDateTime dateWork) {
+    double hours = ChronoUnit.HOURS.between(dateHome, dateWork);
+    double minutes = ChronoUnit.MINUTES.between(dateHome, dateWork);
+    return getTotalTimeInDecimal(hours, minutes);
+  }
+
+  static double getTotalTimeInDecimal(double hours, double minutes) {
+    return hours + (minutes % 60) / 60;
   }
 
   public double getCommuteDuration() {
@@ -40,14 +46,9 @@ public class Commute {
         : work.getDateFromTimeStamp();
   }
 
-  private static double getTimeDuration(final LocalDateTime dateHome,
-      final LocalDateTime dateWork) {
-    double hours = ChronoUnit.HOURS.between(dateHome, dateWork);
-    double minutes = ChronoUnit.MINUTES.between(dateHome, dateWork);
-    return getTotalTimeInDecimal(hours, minutes);
+  public void resetLocations() {
+    home = null;
+    work = null;
   }
 
-  static double getTotalTimeInDecimal(double hours, double minutes) {
-    return hours + (minutes % 60) / 60;
-  }
 }
