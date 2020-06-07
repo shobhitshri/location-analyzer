@@ -20,15 +20,6 @@ public class CSVOutputWriter implements AutoCloseable {
   FileWriter out;
   CSVPrinter printer;
 
-  private static String getDirectory() {
-    String directoryPath = outputDir;
-    File directory = new File(directoryPath);
-    if (!directory.exists()) {
-      directory.mkdir();
-    }
-    return directoryPath;
-  }
-
   public void createCSVFile() throws IOException {
     out = new FileWriter(getOutputFileNameWithPath());
     printer = new CSVPrinter(out, CSVFormat.DEFAULT.withHeader(ResultSet.getHeaders()));
@@ -39,14 +30,25 @@ public class CSVOutputWriter implements AutoCloseable {
     return dir + File.separator + COMMUTE_LOG_CSV;
   }
 
+  private static String getDirectory() {
+    String directoryPath = outputDir;
+    File directory = new File(directoryPath);
+    if (!directory.exists()) {
+      directory.mkdir();
+    }
+    return directoryPath;
+  }
+
   public void writeToCSV(List<String> content) throws IOException {
     printer.printRecord(content);
   }
 
   public void close() {
     try {
-      printer.flush();
-      printer.close();
+      if (printer != null) {
+        printer.flush();
+        printer.close();
+      }
     } catch (IOException ex) {
       logger.warn("Failed to close the CSV writer with exception: {}", ex);
     }

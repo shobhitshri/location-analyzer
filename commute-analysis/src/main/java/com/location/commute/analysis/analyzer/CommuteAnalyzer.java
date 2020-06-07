@@ -21,7 +21,7 @@ public class CommuteAnalyzer {
   @Setter
   Location workLocation;
 
-  public void analyze(String locationFilePath) {
+  public void analyze(String locationFilePath) throws IOException {
     int day = -1;
     Commute morningCommute = Commute.builder().isFromHomeToWork(true).build();
     Commute eveningCommute = Commute.builder().isFromHomeToWork(false).build();
@@ -70,9 +70,11 @@ public class CommuteAnalyzer {
           eveningCommute.resetLocations();
         }
       }
-    } catch (Exception e) {
+    } catch (IOException ex) {
+      throw ex;
+    } catch (Exception ex) {
       throw new RuntimeException("Something unexpected occurred in analyzing the commute. Please "
-          + "contact in GitHub project page if you need help.", e);
+          + "contact in GitHub project page if you need help.", ex);
     }
   }
 
