@@ -14,20 +14,14 @@ import org.apache.logging.log4j.Logger;
 public class CSVOutputWriter implements AutoCloseable {
 
   private static final String COMMUTE_LOG_CSV = "commute_log.csv";
-  private static final String LOCATION_HISTORY_JSON = "location_history.json";
   @Setter
   private static String outputDir = System.getProperty("user.home");
   private static Logger logger = LogManager.getLogger(CSVOutputWriter.class);
   FileWriter out;
   CSVPrinter printer;
 
-  public static String getOutputJSONFileNameWithPath() {
-    String dir = getDirectory();
-    return dir + File.separator + LOCATION_HISTORY_JSON;
-  }
-
   private static String getDirectory() {
-    String directoryPath = outputDir + File.separator + "LocationResults";
+    String directoryPath = outputDir;
     File directory = new File(directoryPath);
     if (!directory.exists()) {
       directory.mkdir();
