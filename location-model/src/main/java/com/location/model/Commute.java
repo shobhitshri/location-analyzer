@@ -29,7 +29,9 @@ public class Commute {
   public double getCommuteDuration() {
     LocalDateTime dateHome = home.getDateFromTimeStamp();
     LocalDateTime dateWork = work.getDateFromTimeStamp();
-    return getTimeDuration(dateHome, dateWork);
+    return isFromHomeToWork()
+        ? getTimeDuration(dateHome, dateWork)
+        : getTimeDuration(dateWork, dateHome);
   }
 
   public LocalDateTime getCommuteStartTime() {
