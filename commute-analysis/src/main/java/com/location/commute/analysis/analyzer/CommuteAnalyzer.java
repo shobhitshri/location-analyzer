@@ -7,6 +7,7 @@ import com.location.model.Location;
 import com.location.model.ResultSet;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -65,7 +66,7 @@ public class CommuteAnalyzer {
         if (morningCommute.getHome() != null && morningCommute.getWork() != null &&
             eveningCommute.getWork() != null && eveningCommute.getHome() != null) {
           writeCommuteToCSV(morningCommute, csvOutputWriter);
-          writeCommuteToCSV(eveningCommute, csvOutputWriter);
+          writeReturnCommuteToCSV(morningCommute, eveningCommute, csvOutputWriter);
           morningCommute.resetLocations();
           eveningCommute.resetLocations();
         }
@@ -86,7 +87,28 @@ public class CommuteAnalyzer {
 
   private void writeCommuteToCSV(Commute commute, CSVOutputWriter csvOutputWriter)
       throws IOException {
-    List<String> records = ResultSet.buildRecord(commute);
+    //TODO: fix -1;
+    List<String> records = ResultSet.buildRecord(commute, -1);
     csvOutputWriter.writeToCSV(records);
   }
+
+  private void writeReturnCommuteToCSV(Commute morningCommute, Commute eveningCommute,
+      CSVOutputWriter csvOutputWriter) throws IOException {
+    double workDuration = getTimeInterval(morningCommute, eveningCommute);
+    List<String> records = ResultSet.buildRecord(eveningCommute, workDuration);
+    csvOutputWriter.writeToCSV(records);
+  }
+
+  public static double getTimeInterval(Commute toWork, Commute fromWork) {
+    LocalDateTime reachingWork = toWork.getWork().getDateFromTimeStamp();
+    LocalDateTime leavingWork = fromWork.getWork().getDateFromTimeStamp();
+    double hours = ChronoUnit.HOURS.between(reachingWork, leavingWork);
+    double minutes = ChronoUnit.MINUTES.between(reachingWork, leavingWork);
+    return getTotalTimeInDecimal(hours, minutes);
+  }
+
+  static double getTotalTimeInDecimal(double hours, double minutes) {
+    return hours + (minutes % 60) / 60;
+  }
+
 }
