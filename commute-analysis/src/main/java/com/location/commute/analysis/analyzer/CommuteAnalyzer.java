@@ -89,14 +89,17 @@ public class CommuteAnalyzer {
   private void writeCommuteToCSV(Commute commute, CSVOutputWriter csvOutputWriter)
       throws IOException {
     //TODO: fix -1;
-    List<String> records = ResultSet.buildRecord(commute, -1);
+    List<String> records = ResultSet.buildRecord(commute, -1, -1);
     csvOutputWriter.writeToCSV(records);
   }
 
   private void writeReturnCommuteToCSV(Commute morningCommute, Commute eveningCommute,
       CSVOutputWriter csvOutputWriter) throws IOException {
     double workDuration = Commute.getWorkDuration(morningCommute, eveningCommute);
-    List<String> records = ResultSet.buildRecord(eveningCommute, workDuration);
+    double totalCommuteDuration =
+        morningCommute.getCommuteDuration() + eveningCommute.getCommuteDuration();
+    List<String> records = ResultSet
+        .buildRecord(eveningCommute, workDuration, totalCommuteDuration);
     csvOutputWriter.writeToCSV(records);
   }
 }

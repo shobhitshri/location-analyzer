@@ -20,6 +20,8 @@ public class ResultSet {
   String duration;
   String toWork;
   String workHours;
+  String totalCommute;
+  String ratio;
 
   public static String[] getHeaders() {
     java.lang.reflect.Field[] allFields = ResultSet.class.getDeclaredFields();
@@ -31,7 +33,7 @@ public class ResultSet {
   }
 
   //TODO: Change it to builder
-  public static List<String> buildRecord(Commute commute, double interval) {
+  public static List<String> buildRecord(Commute commute, double workTime, double commuteTime) {
     List<String> record = new ArrayList<>();
     LocalDateTime date = commute.getCommuteStartTime();
     record.add(String.valueOf(date.getYear()));
@@ -43,8 +45,13 @@ public class ResultSet {
     record.add(findStartTimeBlock(date.getHour(), date.getMinute()));
     record.add(getFormattedTimeInterval(commute.getCommuteDuration()));
     record.add(String.valueOf(commute.isFromHomeToWork()));
-    if (interval != -1) {
-      record.add(getFormattedTimeInterval(interval));
+    if (workTime != -1) {
+      record.add(getFormattedTimeInterval(workTime));
+    }
+    if (commuteTime != -1) {
+      record.add(getFormattedTimeInterval(commuteTime));
+      record.add(getFormattedTimeInterval(
+          ((commuteTime / (commuteTime + workTime)) * 100)));
     }
 
     return record;
@@ -57,15 +64,15 @@ public class ResultSet {
   }
 
   static String findStartTimeBlock(int hour, int minute) {
-    int minuteBlock = roundUp(minute);
-    double block = hour + (double) minuteBlock / 100;
+    double minuteBlock = roundUp(minute, 15);
+    double block = hour + minuteBlock / 60;
     return String.valueOf(block);
   }
 
-  static int roundUp(int toRound) {
-    int multiple = 10;
-    int rem = toRound % multiple;
-    int result = toRound - rem;
+  static double roundUp(int toRound, double blockSize) {
+    double multiple = blockSize;
+    double rem = toRound % multiple;
+    double result = toRound - rem;
     if (rem > (multiple / 2)) {
       result += multiple;
     }

@@ -10,7 +10,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Builder
 public class Commute {
-
+  private static final double BLOCK_SIZE = 15;
   Location home;
   Location work;
   boolean isFromHomeToWork;
@@ -18,10 +18,10 @@ public class Commute {
   public static double getWorkDuration(final Commute toWork, final Commute fromWork) {
     LocalDateTime reachingWork = toWork.getWork().getDateFromTimeStamp();
     LocalDateTime leavingWork = fromWork.getWork().getDateFromTimeStamp();
-    return getTimeDuration(reachingWork, leavingWork);
+    return getTimeDurationBetween(reachingWork, leavingWork);
   }
 
-  private static double getTimeDuration(final LocalDateTime dateHome,
+  private static double getTimeDurationBetween(final LocalDateTime dateHome,
       final LocalDateTime dateWork) {
     double hours = ChronoUnit.HOURS.between(dateHome, dateWork);
     double minutes = ChronoUnit.MINUTES.between(dateHome, dateWork);
@@ -29,15 +29,18 @@ public class Commute {
   }
 
   static double getTotalTimeInDecimal(double hours, double minutes) {
-    return hours + (minutes % 60) / 60;
+    double minuteBlock = roundUp(minutes, BLOCK_SIZE);
+    return hours + (minuteBlock % 60) / 60;
   }
 
-  public double getCommuteDuration() {
-    LocalDateTime dateHome = home.getDateFromTimeStamp();
-    LocalDateTime dateWork = work.getDateFromTimeStamp();
-    return isFromHomeToWork()
-        ? getTimeDuration(dateHome, dateWork)
-        : getTimeDuration(dateWork, dateHome);
+  static double roundUp(double toRound, double blockSize) {
+    double multiple = blockSize;
+    double rem = toRound % multiple;
+    double result = toRound - rem;
+    if (rem > (multiple / 2)) {
+      result += multiple;
+    }
+    return result;
   }
 
   public LocalDateTime getCommuteStartTime() {
@@ -49,6 +52,14 @@ public class Commute {
   public void resetLocations() {
     home = null;
     work = null;
+  }
+
+  public double getCommuteDuration() {
+    LocalDateTime dateHome = home.getDateFromTimeStamp();
+    LocalDateTime dateWork = work.getDateFromTimeStamp();
+    return isFromHomeToWork()
+        ? getTimeDurationBetween(dateHome, dateWork)
+        : getTimeDurationBetween(dateWork, dateHome);
   }
 
 }
