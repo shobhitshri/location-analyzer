@@ -10,7 +10,7 @@ public class ResultSetTest {
   @Test
   public void getHeaders() {
     String[] headers = ResultSet.getHeaders();
-    assertEquals(9, headers.length);
+    assertEquals(10, headers.length);
   }
 
   @Test

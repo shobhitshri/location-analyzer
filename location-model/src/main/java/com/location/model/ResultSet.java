@@ -1,5 +1,7 @@
 package com.location.model;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ public class ResultSet {
   String block;
   String duration;
   String toWork;
+  String workHours;
 
   public static String[] getHeaders() {
     java.lang.reflect.Field[] allFields = ResultSet.class.getDeclaredFields();
@@ -27,7 +30,8 @@ public class ResultSet {
     return record;
   }
 
-  public static List<String> buildRecord(Commute commute) {
+  //TODO: Change it to builder
+  public static List<String> buildRecord(Commute commute, double interval) {
     List<String> record = new ArrayList<>();
     LocalDateTime date = commute.getCommuteStartTime();
     record.add(String.valueOf(date.getYear()));
@@ -37,9 +41,19 @@ public class ResultSet {
     record.add(String.valueOf(date.getHour()));
     record.add(String.valueOf(date.getMinute()));
     record.add(findStartTimeBlock(date.getHour(), date.getMinute()));
-    record.add(String.valueOf(commute.getCommuteDuration()));
+    record.add(getFormattedTimeInterval(commute.getCommuteDuration()));
     record.add(String.valueOf(commute.isFromHomeToWork()));
+    if (interval != -1) {
+      record.add(getFormattedTimeInterval(interval));
+    }
+
     return record;
+  }
+
+  static String getFormattedTimeInterval(final double interval) {
+    DecimalFormat df = new DecimalFormat("#.##");
+    df.setRoundingMode(RoundingMode.CEILING);
+    return df.format(interval);
   }
 
   static String findStartTimeBlock(int hour, int minute) {

@@ -65,7 +65,7 @@ public class CommuteAnalyzer {
         if (morningCommute.getHome() != null && morningCommute.getWork() != null &&
             eveningCommute.getWork() != null && eveningCommute.getHome() != null) {
           writeCommuteToCSV(morningCommute, csvOutputWriter);
-          writeCommuteToCSV(eveningCommute, csvOutputWriter);
+          writeReturnCommuteToCSV(morningCommute, eveningCommute, csvOutputWriter);
           morningCommute.resetLocations();
           eveningCommute.resetLocations();
         }
@@ -86,7 +86,15 @@ public class CommuteAnalyzer {
 
   private void writeCommuteToCSV(Commute commute, CSVOutputWriter csvOutputWriter)
       throws IOException {
-    List<String> records = ResultSet.buildRecord(commute);
+    //TODO: fix -1;
+    List<String> records = ResultSet.buildRecord(commute, -1);
+    csvOutputWriter.writeToCSV(records);
+  }
+
+  private void writeReturnCommuteToCSV(Commute morningCommute, Commute eveningCommute,
+      CSVOutputWriter csvOutputWriter) throws IOException {
+    double workDuration = Commute.getWorkDuration(morningCommute, eveningCommute);
+    List<String> records = ResultSet.buildRecord(eveningCommute, workDuration);
     csvOutputWriter.writeToCSV(records);
   }
 }
