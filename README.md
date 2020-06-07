@@ -66,7 +66,8 @@ https://docs.oracle.com/javase/8/docs/api/java/time/ZoneId.html#SHORT_IDS
 
 ### 4. Review the Results
 
-The program will generate a CSV file named `commute_log.csv` in the output location specified. Enjoy!
+The program will generate a CSV file named `commute_data.csv` in the output location specified
+. Enjoy!
 
 ## FAQ
 

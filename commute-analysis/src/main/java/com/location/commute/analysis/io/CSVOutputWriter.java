@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 public class CSVOutputWriter implements AutoCloseable {
 
-  private static final String COMMUTE_LOG_CSV = "commute_log.csv";
+  private static final String COMMUTE_LOG_CSV = "commute_data.csv";
   @Setter
   private static String outputDir = System.getProperty("user.home");
   private static Logger logger = LogManager.getLogger(CSVOutputWriter.class);
