@@ -10,7 +10,7 @@ public class CommuteTest {
     Location homeStart = Location.builder().timestampMs(String.valueOf(1546314000000L)).build();
     Location workReach = Location.builder().timestampMs(String.valueOf(1546318200000L)).build();
     Commute commuteHome = new Commute(homeStart, workReach, true);
-    long duration = commuteHome.getCommuteDuration();
-    Assert.assertEquals(70, duration);
+    double duration = commuteHome.getCommuteDuration();
+    Assert.assertEquals(1.16, duration, 0.01);
   }
 }

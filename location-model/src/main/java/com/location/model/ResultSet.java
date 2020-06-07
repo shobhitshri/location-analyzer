@@ -41,16 +41,16 @@ public class ResultSet {
     record.add(String.valueOf(date.getHour()));
     record.add(String.valueOf(date.getMinute()));
     record.add(findStartTimeBlock(date.getHour(), date.getMinute()));
-    record.add(String.valueOf(commute.getCommuteDuration()));
+    record.add(getFormattedTimeInterval(commute.getCommuteDuration()));
     record.add(String.valueOf(commute.isFromHomeToWork()));
     if (interval != -1) {
-      record.add(getFormattedInterval(interval));
+      record.add(getFormattedTimeInterval(interval));
     }
 
     return record;
   }
 
-  static String getFormattedInterval(final double interval) {
+  static String getFormattedTimeInterval(final double interval) {
     DecimalFormat df = new DecimalFormat("#.##");
     df.setRoundingMode(RoundingMode.CEILING);
     return df.format(interval);
