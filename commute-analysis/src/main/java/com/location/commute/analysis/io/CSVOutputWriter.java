@@ -27,11 +27,15 @@ public class CSVOutputWriter implements AutoCloseable {
 
   public static String getOutputFileNameWithPath() {
     String dir = getDirectory();
-    return dir + File.separator + COMMUTE_LOG_CSV;
+    return dir + COMMUTE_LOG_CSV;
   }
 
   private static String getDirectory() {
     String directoryPath = outputDir;
+    if (!outputDir.endsWith(File.separator)) {
+      directoryPath = directoryPath + File.separator;
+    }
+
     File directory = new File(directoryPath);
     if (!directory.exists()) {
       directory.mkdir();
