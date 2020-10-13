@@ -60,7 +60,7 @@
       <artifactId>junit</artifactId>
       <groupId>junit</groupId>
       <scope>test</scope>
-      <version>4.11</version>
+      <version>4.13.1</version>
     </dependency>
     <dependency>
       <artifactId>lombok</artifactId>
